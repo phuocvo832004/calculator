@@ -1,23 +1,36 @@
- // Input: Get the result display element
- const resultField = document.getElementById('result');
+/**
+ * Input: A value (number or operator) to be displayed.
+ * Process: Appends the value to the display input field.
+ * Output: Updated display showing the input value.
+ */
+function appendToDisplay(value) {
+    document.getElementById('display').value += value; 
+}
 
- // Output: Append clicked number/operator to the result field
- function appendToResult(value) {
-     resultField.value += value;
- }
+/**
+ * Input: None.
+ * Process: Clears the display input field.
+ * Output: Display is reset to an empty string.
+ */
+function clearDisplay() {
+    document.getElementById('display').value = '';
+}
 
- // Process: Clear the result field
- function clearResult() {
-     resultField.value = '';
- }
+/**
+ * Input: The current expression in the display.
+ * Process: Evaluates the expression and replaces '±' with '-' before calculating.
+ * Output: The result of the calculation displayed or 'Error' if there's an issue.
+ */
+function calculateResult() {
+    // Get the display input element by its ID
+    const display = document.getElementById('display');
 
- // Process: Calculate the result from the entered expression
- function calculateResult() {
-     try {
-         // Use eval to compute the result of the expression
-         resultField.value = eval(resultField.value);
-     } catch (error) {
-         // Handle any errors in calculation
-         resultField.value = 'Error';
-     }
- }
+    try {
+        // Replace '±' with '-' in the expression and evaluate it
+        // Assign the evaluated result back to the display
+        display.value = eval(display.value.replace('±', '-'));
+    } catch (error) {
+        // If an error occurs during evaluation, display 'Error'
+        display.value = 'Error'; // Handle any errors in the calculation
+    }
+}
